@@ -1,0 +1,91 @@
+/* =========================================================
+   Design tokens — phong cách tối giản, sạch, nhiều khoảng trắng
+   (học phong cách từ apple.com, đo ngày 13/11/2026;
+    không dùng logo, hình ảnh hay nội dung của Apple)
+   ========================================================= */
+
+:root {
+  /* ---------- MÀU SẮC ---------- */
+  /* Chữ */
+  --color-text:            #1d1d1f; /* chữ chính, gần đen */
+  --color-text-secondary:  #6e6e73; /* chữ phụ */
+  --color-text-tertiary:   #86868b; /* chú thích, nhãn nhỏ */
+  --color-text-on-dark:    #f5f5f7; /* chữ trên nền tối */
+  --color-text-on-accent:  #ffffff;
+
+  /* Nền */
+  --color-bg:              #ffffff; /* nền chính */
+  --color-bg-alt:          #f5f5f7; /* nền khối xen kẽ, thẻ sáng */
+  --color-bg-dark:         #000000; /* khối nổi bật nền đen */
+  --color-surface-dark:    #161617; /* thẻ / footer nền tối */
+  --color-nav:             rgba(29, 29, 31, 0.8); /* thanh điều hướng mờ */
+
+  /* Nhấn & liên kết */
+  --color-accent:          #0071e3; /* nút chính */
+  --color-accent-hover:    #0077ed;
+  --color-accent-active:   #006edb;
+  --color-link:            #0066cc; /* liên kết trên nền sáng */
+  --color-link-on-dark:    #2997ff; /* liên kết trên nền tối */
+
+  /* Viền & trạng thái */
+  --color-border:          #d2d2d7;
+  --color-border-strong:   #86868b;
+  --color-focus-ring:      rgba(0, 125, 250, 0.6);
+  --color-error:           #e30000;
+  --color-error-bg:        #fff5f5;
+  --color-success:         #008009;
+  --color-overlay:         rgba(0, 0, 0, 0.48);
+
+  /* ---------- KIỂU CHỮ ---------- */
+  /* Dùng font hệ thống: trên Mac/iPhone sẽ hiển thị San Francisco */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-text:    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* ---------- CỠ CHỮ (size / line-height / letter-spacing) ---------- */
+  --text-hero-size: 56px;      --text-hero-lh: 1.07;    --text-hero-ls: -0.005em;
+  --text-h1-size: 48px;        --text-h1-lh: 1.083;     --text-h1-ls: -0.003em;
+  --text-h2-size: 40px;        --text-h2-lh: 1.1;       --text-h2-ls: 0em;
+  --text-h3-size: 32px;        --text-h3-lh: 1.125;     --text-h3-ls: 0.004em;
+  --text-subhead-size: 24px;   --text-subhead-lh: 1.167; --text-subhead-ls: 0.009em;
+  --text-subhead-sm-size: 19px;--text-subhead-sm-lh: 1.21; --text-subhead-sm-ls: 0.012em;
+  --text-body-size: 17px;      --text-body-lh: 1.47;    --text-body-ls: -0.022em;
+  --text-body-sm-size: 14px;   --text-body-sm-lh: 1.43; --text-body-sm-ls: -0.016em;
+  --text-caption-size: 12px;   --text-caption-lh: 1.33; --text-caption-ls: -0.01em;
+
+  /* ---------- KHOẢNG CÁCH (thang 4px) ---------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-11: 44px;   /* khoảng đệm đầu khối nội dung */
+  --space-16: 64px;
+  --space-22: 88px;   /* khoảng cách giữa các section lớn */
+
+  --container-max: 980px;  /* chiều rộng nội dung chuẩn */
+  --container-wide: 1440px;
+  --gutter: 12px;          /* khoảng cách giữa các tile */
+
+  /* ---------- BO GÓC ---------- */
+  --radius-sm:   8px;    /* nút nhỏ, tag */
+  --radius-md:   12px;   /* ô nhập */
+  --radius-lg:   18px;   /* thẻ */
+  --radius-xl:   28px;   /* thẻ lớn, khối nổi bật */
+  --radius-pill: 980px;  /* nút bấm dạng viên thuốc */
+  --radius-full: 50%;    /* nút tròn, avatar */
+
+  /* ---------- ĐỔ BÓNG & CHUYỂN ĐỘNG ---------- */
+  --shadow-card:  0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 28px rgba(0, 0, 0, 0.12);
+  --blur-nav:     saturate(180%) blur(20px);
+  --ease:         cubic-bezier(0.28, 0.11, 0.32, 1);
+  --duration:     240ms;
+}

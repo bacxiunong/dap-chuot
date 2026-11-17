@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System — Xem trước</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-text);font-size:var(--text-body-size);line-height:var(--text-body-lh);letter-spacing:var(--text-body-ls);color:var(--color-text);background:var(--color-bg);-webkit-font-smoothing:antialiased}
+  a{color:var(--color-link);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Khung trang */
+  .nav{position:sticky;top:0;z-index:10;height:44px;background:var(--color-nav);backdrop-filter:var(--blur-nav);-webkit-backdrop-filter:var(--blur-nav)}
+  .nav .inner{max-width:var(--container-max);margin:0 auto;height:100%;display:flex;align-items:center;gap:var(--space-6);padding:0 var(--space-4);font-size:var(--text-caption-size);letter-spacing:var(--text-caption-ls)}
+  .nav a{color:var(--color-text-on-dark);opacity:.8}
+  .nav a:hover{opacity:1;text-decoration:none}
+  .nav .brand{font-weight:var(--font-weight-semibold);opacity:1;margin-right:auto}
+  .container{max-width:var(--container-max);margin:0 auto;padding:0 var(--space-4)}
+  section{padding:var(--space-22) 0}
+  section.alt{background:var(--color-bg-alt)}
+  .eyebrow{font-size:var(--text-caption-size);font-weight:var(--font-weight-semibold);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-2)}
+  .section-title{font-family:var(--font-display);font-size:var(--text-h2-size);line-height:var(--text-h2-lh);font-weight:var(--font-weight-semibold);margin-bottom:var(--space-3)}
+  .section-desc{color:var(--color-text-secondary);max-width:640px;margin-bottom:var(--space-11)}
+  .group-label{font-size:var(--text-body-sm-size);font-weight:var(--font-weight-semibold);margin:var(--space-8) 0 var(--space-4)}
+  code{font-family:var(--font-mono);font-size:12px;color:var(--color-text-secondary)}
+
+  /* Hero */
+  .hero{text-align:center;padding:var(--space-22) 0 var(--space-16)}
+  .hero h1{font-family:var(--font-display);font-size:var(--text-hero-size);line-height:var(--text-hero-lh);letter-spacing:var(--text-hero-ls);font-weight:var(--font-weight-semibold)}
+  .hero p{font-family:var(--font-display);font-size:var(--text-subhead-size);line-height:var(--text-subhead-lh);letter-spacing:var(--text-subhead-ls);color:var(--color-text-secondary);margin:var(--space-2) 0 var(--space-6)}
+  .actions{display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;align-items:center}
+
+  /* Bảng màu */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-4)}
+  .swatch{background:var(--color-bg);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card)}
+  .swatch .chip{height:88px}
+  .swatch .meta{padding:var(--space-3) var(--space-4)}
+  .swatch .name{font-size:var(--text-body-sm-size);font-weight:var(--font-weight-semibold)}
+
+  /* Kiểu chữ */
+  .type-row{display:grid;grid-template-columns:180px 1fr;gap:var(--space-6);align-items:baseline;padding:var(--space-6) 0;border-bottom:1px solid var(--color-border)}
+  .type-row:last-child{border-bottom:0}
+  .type-meta .label{font-size:var(--text-body-sm-size);font-weight:var(--font-weight-semibold)}
+  .t-hero{font-family:var(--font-display);font-size:var(--text-hero-size);line-height:var(--text-hero-lh);letter-spacing:var(--text-hero-ls);font-weight:600}
+  .t-h1{font-family:var(--font-display);font-size:var(--text-h1-size);line-height:var(--text-h1-lh);letter-spacing:var(--text-h1-ls);font-weight:600}
+  .t-h2{font-family:var(--font-display);font-size:var(--text-h2-size);line-height:var(--text-h2-lh);letter-spacing:var(--text-h2-ls);font-weight:600}
+  .t-h3{font-family:var(--font-display);font-size:var(--text-h3-size);line-height:var(--text-h3-lh);letter-spacing:var(--text-h3-ls);font-weight:600}
+  .t-subhead{font-family:var(--font-display);font-size:var(--text-subhead-size);line-height:var(--text-subhead-lh);letter-spacing:var(--text-subhead-ls)}
+  .t-subhead-sm{font-family:var(--font-display);font-size:var(--text-subhead-sm-size);line-height:var(--text-subhead-sm-lh);letter-spacing:var(--text-subhead-sm-ls)}
+  .t-body{font-size:var(--text-body-size);line-height:var(--text-body-lh);letter-spacing:var(--text-body-ls)}
+  .t-body-sm{font-size:var(--text-body-sm-size);line-height:var(--text-body-sm-lh);letter-spacing:var(--text-body-sm-ls)}
+  .t-caption{font-size:var(--text-caption-size);line-height:var(--text-caption-lh);letter-spacing:var(--text-caption-ls);color:var(--color-text-secondary)}
+
+  /* Nút bấm */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-family:var(--font-text);font-size:var(--text-body-size);letter-spacing:var(--text-body-ls);line-height:1.18;padding:11px 21px;border-radius:var(--radius-pill);border:1px solid transparent;cursor:pointer;transition:background var(--duration) var(--ease),color var(--duration) var(--ease),border-color var(--duration) var(--ease);text-decoration:none}
+  .btn:hover{text-decoration:none}
+  .btn:focus-visible{outline:none;box-shadow:0 0 0 4px var(--color-focus-ring)}
+  .btn-primary{background:var(--color-accent);color:var(--color-text-on-accent)}
+  .btn-primary:hover{background:var(--color-accent-hover)}
+  .btn-primary:active{background:var(--color-accent-active)}
+  .btn-secondary{background:transparent;color:var(--color-accent);border-color:var(--color-accent)}
+  .btn-secondary:hover{background:var(--color-accent);color:var(--color-text-on-accent)}
+  .btn-neutral{background:var(--color-bg-alt);color:var(--color-text)}
+  .btn-neutral:hover{background:#e8e8ed}
+  .btn-dark{background:var(--color-text);color:var(--color-text-on-dark)}
+  .btn-sm{font-size:var(--text-body-sm-size);padding:8px 15px}
+  .btn-lg{font-size:var(--text-subhead-sm-size);padding:14px 28px}
+  .btn[disabled]{opacity:.42;cursor:default;pointer-events:none}
+  .btn-icon{width:36px;height:36px;padding:0;border-radius:var(--radius-full);background:var(--color-bg-alt);color:var(--color-text);font-size:20px}
+  .link-more::after{content:" ›"}
+  .on-dark{background:var(--color-bg-dark);padding:var(--space-8);border-radius:var(--radius-xl);display:flex;gap:var(--space-4);flex-wrap:wrap;align-items:center}
+  .on-dark .link-more{color:var(--color-link-on-dark)}
+  .on-dark .btn-secondary{color:var(--color-link-on-dark);border-color:var(--color-link-on-dark)}
+
+  /* Ô nhập */
+  .form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-6)}
+  .field{display:flex;flex-direction:column;gap:var(--space-2)}
+  .field label{font-size:var(--text-body-sm-size);font-weight:var(--font-weight-semibold)}
+  .input,.select{font-family:var(--font-text);font-size:var(--text-body-size);letter-spacing:var(--text-body-ls);color:var(--color-text);background:var(--color-bg);height:52px;padding:0 var(--space-4);border:1px solid var(--color-border-strong);border-radius:var(--radius-md);transition:border-color var(--duration) var(--ease),box-shadow var(--duration) var(--ease);width:100%}
+  .input::placeholder{color:var(--color-text-tertiary)}
+  .input:focus,.select:focus{outline:none;border-color:var(--color-accent);box-shadow:0 0 0 4px var(--color-focus-ring)}
+  .input.is-error{border-color:var(--color-error);background:var(--color-error-bg)}
+  .input[disabled]{background:var(--color-bg-alt);color:var(--color-text-tertiary);border-color:var(--color-border)}
+  .help{font-size:var(--text-caption-size);color:var(--color-text-secondary)}
+  .help.error{color:var(--color-error)}
+  .search{position:relative}
+  .search .input{padding-left:40px;border-radius:var(--radius-pill);background:var(--color-bg-alt);border-color:transparent}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--color-text-tertiary);stroke-width:2}
+  .check{display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-body-sm-size)}
+  .check input{width:20px;height:20px;accent-color:var(--color-accent)}
+
+  /* Thẻ */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--space-6)}
+  .card{background:var(--color-bg);border-radius:var(--radius-lg);padding:var(--space-8) var(--space-6);box-shadow:var(--shadow-card);transition:transform var(--duration) var(--ease),box-shadow var(--duration) var(--ease)}
+  .card:hover{transform:scale(1.015);box-shadow:var(--shadow-hover)}
+  .card .tag{display:inline-block;font-size:var(--text-caption-size);font-weight:var(--font-weight-semibold);color:#b64400;margin-bottom:var(--space-2)}
+  .card h3{font-family:var(--font-display);font-size:var(--text-subhead-size);line-height:var(--text-subhead-lh);font-weight:var(--font-weight-semibold);margin-bottom:var(--space-2)}
+  .card p{color:var(--color-text-secondary);font-size:var(--text-body-sm-size);line-height:var(--text-body-sm-lh);margin-bottom:var(--space-6)}
+  .card .price{font-size:var(--text-body-sm-size);margin-bottom:var(--space-4)}
+  .card.dark{background:var(--color-surface-dark);color:var(--color-text-on-dark);box-shadow:none}
+  .card.dark p{color:var(--color-text-tertiary)}
+  .card.dark a{color:var(--color-link-on-dark)}
+  .card .art{height:140px;border-radius:var(--radius-md);margin:0 0 var(--space-6);background:linear-gradient(135deg,#e8e8ed,#f5f5f7)}
+  .card.dark .art{background:radial-gradient(circle at 30% 30%,#3a3a3c,#161617)}
+  .tile{grid-column:1/-1;background:var(--color-bg-dark);color:var(--color-text-on-dark);border-radius:var(--radius-xl);text-align:center;padding:var(--space-16) var(--space-6)}
+  .tile h3{font-family:var(--font-display);font-size:var(--text-h1-size);line-height:var(--text-h1-lh);font-weight:600}
+  .tile p{font-family:var(--font-display);font-size:var(--text-subhead-size);color:var(--color-text-on-dark);opacity:.86;margin:var(--space-2) 0 var(--space-6)}
+  .tile .link-more{color:var(--color-link-on-dark)}
+
+  /* Khoảng cách & bo góc */
+  .scale{display:flex;flex-direction:column;gap:var(--space-3)}
+  .scale-row{display:grid;grid-template-columns:110px 60px 1fr;align-items:center;gap:var(--space-4);font-size:var(--text-body-sm-size)}
+  .bar{height:12px;background:var(--color-accent);border-radius:3px}
+  .radii{display:flex;gap:var(--space-6);flex-wrap:wrap}
+  .radius-box{width:120px;height:88px;background:var(--color-bg);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:var(--text-caption-size)}
+
+  footer{background:var(--color-bg-alt);padding:var(--space-8) 0;font-size:var(--text-caption-size);color:var(--color-text-secondary)}
+
+  @media (max-width:734px){
+    :root{--text-hero-size:40px;--text-h1-size:36px;--text-h2-size:32px;--text-h3-size:28px;--text-subhead-size:21px}
+    section{padding:var(--space-16) 0}
+    .type-row{grid-template-columns:1fr;gap:var(--space-2)}
+    .nav .links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="inner">
+  <a class="brand" href="#">Design System</a>
+  <span class="links" style="display:contents">
+    <a href="#colors">Màu sắc</a><a href="#type">Kiểu chữ</a><a href="#buttons">Nút bấm</a><a href="#inputs">Ô nhập</a><a href="#cards">Thẻ</a><a href="#tokens">Khoảng cách</a>
+  </span>
+</div></nav>
+
+<header class="hero container">
+  <div class="eyebrow">v1.0 · Tối giản · Rõ ràng</div>
+  <h1>Ít hơn, nhưng tốt hơn.</h1>
+  <p>Bộ quy chuẩn giao diện cho các dự án vibecoding.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="#colors">Bắt đầu xem</a>
+    <a class="link-more" href="#tokens">Xem token</a>
+  </div>
+</header>
+
+<!-- MÀU SẮC -->
+<section id="colors" class="alt"><div class="container">
+  <div class="eyebrow">01</div>
+  <h2 class="section-title">Bảng màu</h2>
+  <p class="section-desc">Nền trắng và xám rất nhạt chiếm phần lớn diện tích. Màu xanh chỉ dùng cho hành động chính và liên kết, để mắt người dùng biết ngay chỗ cần bấm.</p>
+
+  <div class="group-label">Chữ</div>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:var(--color-text)"></div><div class="meta"><div class="name">Text</div><code>#1d1d1f</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-text-secondary)"></div><div class="meta"><div class="name">Text secondary</div><code>#6e6e73</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-text-tertiary)"></div><div class="meta"><div class="name">Text tertiary</div><code>#86868b</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-text-on-dark);border-bottom:1px solid var(--color-border)"></div><div class="meta"><div class="name">Text on dark</div><code>#f5f5f7</code></div></div>
+  </div>
+
+  <div class="group-label">Nền</div>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:var(--color-bg);border-bottom:1px solid var(--color-border)"></div><div class="meta"><div class="name">Background</div><code>#ffffff</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-bg-alt);border-bottom:1px solid var(--color-border)"></div><div class="meta"><div class="name">Background alt</div><code>#f5f5f7</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-surface-dark)"></div><div class="meta"><div class="name">Surface dark</div><code>#161617</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-bg-dark)"></div><div class="meta"><div class="name">Background dark</div><code>#000000</code></div></div>
+  </div>
+
+  <div class="group-label">Nhấn, liên kết &amp; trạng thái</div>
+  <div class="swatches">
+    <div class="swatch"><div class="chip" style="background:var(--color-accent)"></div><div class="meta"><div class="name">Accent</div><code>#0071e3</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-link)"></div><div class="meta"><div class="name">Link</div><code>#0066cc</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-link-on-dark)"></div><div class="meta"><div class="name">Link on dark</div><code>#2997ff</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-border)"></div><div class="meta"><div class="name">Border</div><code>#d2d2d7</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-error)"></div><div class="meta"><div class="name">Error</div><code>#e30000</code></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--color-success)"></div><div class="meta"><div class="name">Success</div><code>#008009</code></div></div>
+  </div>
+</div></section>
+
+<!-- KIỂU CHỮ -->
+<section id="type"><div class="container">
+  <div class="eyebrow">02</div>
+  <h2 class="section-title">Kiểu chữ</h2>
+  <p class="section-desc">Font hệ thống (San Francisco trên Mac và iPhone). Tiêu đề đậm vừa (600), khoảng cách chữ hơi khít; thân bài 17px thoáng, dễ đọc.</p>
+
+  <div class="type-row"><div class="type-meta"><div class="label">Hero</div><code>56 / 60 · 600</code></div><div class="t-hero">Nhanh như chớp.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Heading 1</div><code>48 / 52 · 600</code></div><div class="t-h1">Đập chuột, phiên bản mới.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Heading 2</div><code>40 / 44 · 600</code></div><div class="t-h2">Chơi ngay trên trình duyệt.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Heading 3</div><code>32 / 36 · 600</code></div><div class="t-h3">30 giây. 9 ô. Không giới hạn.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Subhead</div><code>24 / 28 · 400</code></div><div class="t-subhead">Phản xạ của bạn, được đo bằng từng cú chạm.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Subhead small</div><code>19 / 23 · 400</code></div><div class="t-subhead-sm">Không cài đặt. Không đăng nhập. Mở là chơi.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Body</div><code>17 / 25 · 400</code></div><div class="t-body">Mỗi lượt kéo dài 30 giây. Chuột xuất hiện ngẫu nhiên ở một trong chín ô; bấm trúng để ghi điểm. Kỷ lục được lưu ngay trên trình duyệt của bạn.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Body small</div><code>14 / 20 · 400</code></div><div class="t-body-sm">Hoạt động tốt trên máy tính và điện thoại có màn hình từ 360px.</div></div>
+  <div class="type-row"><div class="type-meta"><div class="label">Caption</div><code>12 / 16 · 400</code></div><div class="t-caption">Cập nhật lần cuối: 13/11/2026. Mọi nội dung chỉ mang tính minh họa.</div></div>
+</div></section>
+
+<!-- NÚT BẤM -->
+<section id="buttons" class="alt"><div class="container">
+  <div class="eyebrow">03</div>
+  <h2 class="section-title">Nút bấm</h2>
+  <p class="section-desc">Nút dạng viên thuốc (bo tròn hoàn toàn). Mỗi khối chỉ nên có một nút chính màu xanh, kèm tối đa một nút phụ hoặc liên kết “›”.</p>
+
+  <div class="group-label">Kiểu</div>
+  <div class="actions" style="justify-content:flex-start">
+    <button class="btn btn-primary">Nút chính</button>
+    <button class="btn btn-secondary">Nút phụ</button>
+    <button class="btn btn-neutral">Trung tính</button>
+    <button class="btn btn-dark">Nền tối</button>
+    <a class="link-more" href="#">Liên kết tìm hiểu thêm</a>
+  </div>
+
+  <div class="group-label">Kích thước</div>
+  <div class="actions" style="justify-content:flex-start">
+    <button class="btn btn-primary btn-sm">Nhỏ</button>
+    <button class="btn btn-primary">Mặc định</button>
+    <button class="btn btn-primary btn-lg">Lớn</button>
+    <button class="btn btn-icon" aria-label="Thêm">+</button>
+  </div>
+
+  <div class="group-label">Trạng thái</div>
+  <div class="actions" style="justify-content:flex-start">
+    <button class="btn btn-primary" disabled>Đã tắt</button>
+    <button class="btn btn-secondary" disabled>Đã tắt</button>
+    <span class="t-caption">Rê chuột hoặc nhấn Tab để xem trạng thái hover và focus.</span>
+  </div>
+
+  <div class="group-label">Trên nền tối</div>
+  <div class="on-dark">
+    <button class="btn btn-primary">Chơi ngay</button>
+    <button class="btn btn-secondary">Xem luật chơi</button>
+    <a class="link-more" href="#">Tìm hiểu thêm</a>
+  </div>
+</div></section>
+
+<!-- Ô NHẬP -->
+<section id="inputs"><div class="container">
+  <div class="eyebrow">04</div>
+  <h2 class="section-title">Ô nhập</h2>
+  <p class="section-desc">Ô cao 52px, bo góc 12px, viền xám. Khi chọn, viền chuyển xanh kèm vầng sáng nhẹ để dễ nhận biết.</p>
+
+  <div class="form-grid">
+    <div class="field"><label for="f1">Tên người chơi</label><input id="f1" class="input" placeholder="Nhập tên của bạn"><span class="help">Hiển thị trên bảng kỷ lục.</span></div>
+    <div class="field"><label for="f2">Email</label><input id="f2" class="input is-error" value="ten@" aria-invalid="true"><span class="help error">Email chưa đúng định dạng.</span></div>
+    <div class="field"><label for="f3">Mã phòng</label><input id="f3" class="input" value="ABC-123" disabled><span class="help">Trường này đang bị khóa.</span></div>
+    <div class="field"><label for="f4">Độ khó</label><select id="f4" class="select"><option>Dễ</option><option selected>Vừa</option><option>Khó</option></select></div>
+    <div class="field"><label for="f5">Tìm kiếm</label><div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="f5" class="input" placeholder="Tìm trò chơi"></div></div>
+    <div class="field"><label>Tùy chọn</label><label class="check"><input type="checkbox" checked> Bật âm thanh</label><label class="check"><input type="checkbox"> Rung khi bấm trúng</label></div>
+  </div>
+</div></section>
+
+<!-- THẺ -->
+<section id="cards" class="alt"><div class="container">
+  <div class="eyebrow">05</div>
+  <h2 class="section-title">Thẻ</h2>
+  <p class="section-desc">Thẻ nền trắng trên nền xám nhạt, bo góc 18px, đổ bóng rất nhẹ. Khối lớn nền đen dùng để làm nổi bật một thông điệp duy nhất.</p>
+
+  <div class="cards">
+    <article class="card">
+      <div class="art"></div>
+      <span class="tag">Mới</span>
+      <h3>Chế độ Cổ điển</h3>
+      <p>Lưới 3×3, 30 giây, mỗi lần trúng được 1 điểm.</p>
+      <div class="actions" style="justify-content:flex-start"><button class="btn btn-primary btn-sm">Chơi</button><a class="link-more" href="#">Chi tiết</a></div>
+    </article>
+    <article class="card">
+      <div class="art"></div>
+      <h3>Bảng kỷ lục</h3>
+      <p>Xem điểm cao nhất của bạn qua từng lượt chơi.</p>
+      <div class="price"><strong>42 điểm</strong> · kỷ lục hiện tại</div>
+      <a class="link-more" href="#">Xem bảng kỷ lục</a>
+    </article>
+    <article class="card dark">
+      <div class="art"></div>
+      <h3>Chế độ Thử thách</h3>
+      <p>Chuột nhanh dần theo thời gian. Sắp ra mắt.</p>
+      <a class="link-more" href="#">Nhận thông báo</a>
+    </article>
+    <article class="tile">
+      <h3>Sẵn sàng chưa?</h3>
+      <p>30 giây để chứng minh phản xạ của bạn.</p>
+      <div class="actions"><button class="btn btn-primary">Bắt đầu</button><a class="link-more" href="#">Xem luật chơi</a></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- KHOẢNG CÁCH & BO GÓC -->
+<section id="tokens"><div class="container">
+  <div class="eyebrow">06</div>
+  <h2 class="section-title">Khoảng cách &amp; bo góc</h2>
+  <p class="section-desc">Thang khoảng cách theo bội số 4px. Các section cách nhau rộng rãi (88px) để nội dung “thở”.</p>
+
+  <div class="group-label">Khoảng cách</div>
+  <div class="scale">
+    <div class="scale-row"><code>--space-1</code><span>4px</span><div class="bar" style="width:4px"></div></div>
+    <div class="scale-row"><code>--space-2</code><span>8px</span><div class="bar" style="width:8px"></div></div>
+    <div class="scale-row"><code>--space-3</code><span>12px</span><div class="bar" style="width:12px"></div></div>
+    <div class="scale-row"><code>--space-4</code><span>16px</span><div class="bar" style="width:16px"></div></div>
+    <div class="scale-row"><code>--space-5</code><span>20px</span><div class="bar" style="width:20px"></div></div>
+    <div class="scale-row"><code>--space-6</code><span>24px</span><div class="bar" style="width:24px"></div></div>
+    <div class="scale-row"><code>--space-8</code><span>32px</span><div class="bar" style="width:32px"></div></div>
+    <div class="scale-row"><code>--space-11</code><span>44px</span><div class="bar" style="width:44px"></div></div>
+    <div class="scale-row"><code>--space-16</code><span>64px</span><div class="bar" style="width:64px"></div></div>
+    <div class="scale-row"><code>--space-22</code><span>88px</span><div class="bar" style="width:88px"></div></div>
+  </div>
+
+  <div class="group-label">Bo góc</div>
+  <div class="radii">
+    <div class="radius-box" style="border-radius:var(--radius-sm)"><strong>sm</strong><code>8px</code></div>
+    <div class="radius-box" style="border-radius:var(--radius-md)"><strong>md</strong><code>12px</code></div>
+    <div class="radius-box" style="border-radius:var(--radius-lg)"><strong>lg</strong><code>18px</code></div>
+    <div class="radius-box" style="border-radius:var(--radius-xl)"><strong>xl</strong><code>28px</code></div>
+    <div class="radius-box" style="border-radius:var(--radius-pill)"><strong>pill</strong><code>980px</code></div>
+    <div class="radius-box" style="width:88px;border-radius:var(--radius-full)"><strong>full</strong><code>50%</code></div>
+  </div>
+</div></section>
+
+<footer><div class="container">Design System v1.0 · Học phong cách tối giản; không dùng logo, hình ảnh hay nội dung của bất kỳ thương hiệu nào.</div></footer>
+
+</body>
+</html>
