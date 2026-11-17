@@ -1,0 +1,18 @@
+# Chỉ đưa vào image những gì server cần (package.json, server.js, app/, design/)
+.git
+.github
+.gitignore
+.dockerignore
+docs
+README.md
+YEU-CAU.md
+Dockerfile
+docker-compose.yml
+node_modules
+npm-debug.log*
+.env
+.env.*
+.DS_Store
+.vscode
+.idea
+*.log
