@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đập Chuột 🐭</title>
+<link rel="stylesheet" href="../design/tokens.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="frame">
+
+  <!-- S-01 · Bắt đầu -->
+  <section id="screen-start" class="screen screen-center">
+    <h1 class="title">Đập Chuột 🐭</h1>
+    <p class="hint">Bấm trúng chuột để được 1 điểm.<br>Bạn có 30 giây!</p>
+    <div class="record" id="start-record">
+      <div class="label">Kỷ lục</div>
+      <div class="record-value" id="start-record-value">0</div>
+    </div>
+    <button type="button" class="btn btn-primary" id="btn-start">Bắt đầu</button>
+  </section>
+
+  <!-- S-02 · Chơi -->
+  <section id="screen-play" class="screen" hidden>
+    <div class="hud">
+      <span>Điểm: <span id="hud-score">0</span></span>
+      <span class="time" id="hud-time-wrap">⏱ <span id="hud-time">30</span></span>
+    </div>
+    <div class="grid" id="grid" aria-label="Lưới 3×3"></div>
+  </section>
+
+  <!-- S-03 · Kết thúc -->
+  <section id="screen-end" class="screen screen-center" hidden>
+    <h2 class="end-title">Hết giờ!</h2>
+    <div>
+      <div class="label">Điểm của bạn</div>
+      <div class="final-score" id="end-score">0</div>
+    </div>
+    <div class="new-record" id="end-new-record" hidden>Kỷ lục mới!</div>
+    <div class="end-record" id="end-record">Kỷ lục: <span id="end-record-value">0</span></div>
+    <button type="button" class="btn btn-primary" id="btn-replay">Chơi lại</button>
+  </section>
+
+</main>
+<script src="game.js"></script>
+</body>
+</html>

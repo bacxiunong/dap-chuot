@@ -1,0 +1,53 @@
+/* Đập Chuột — giao diện theo docs/03-man-hinh.html, chỉ dùng biến trong ../design/tokens.css */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--font-text);font-size:var(--text-body-size);line-height:var(--text-body-lh);
+  letter-spacing:var(--text-body-ls);color:var(--color-text);background:var(--color-bg);
+  -webkit-font-smoothing:antialiased;
+  /* F-10: chạm nhanh không phóng to, không bôi chọn chữ */
+  touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
+}
+[hidden]{display:none !important}
+
+/* Khung game: điện thoại full ngang lề 16px; từ 735px rộng tối đa 480px, căn giữa */
+.frame{width:100%;max-width:480px;margin:0 auto;min-height:100%;padding:var(--space-6) var(--space-4);display:flex;flex-direction:column}
+@media (min-width:735px){
+  body{background:var(--color-bg-alt);display:flex;align-items:center;justify-content:center;padding:var(--space-8) var(--space-4)}
+  .frame{min-height:0;background:var(--color-bg);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);padding:var(--space-8) var(--space-6)}
+}
+.screen{display:flex;flex-direction:column;gap:var(--space-6);flex:1}
+.screen-center{align-items:center;justify-content:center;text-align:center;min-height:440px}
+
+/* S-01 */
+.title{font-family:var(--font-display);font-size:var(--text-h1-size);line-height:var(--text-h1-lh);letter-spacing:var(--text-h1-ls);font-weight:var(--font-weight-semibold)}
+.hint{font-family:var(--font-display);font-size:var(--text-subhead-sm-size);line-height:var(--text-subhead-sm-lh);letter-spacing:var(--text-subhead-sm-ls);color:var(--color-text-secondary)}
+.label{font-size:var(--text-caption-size);line-height:var(--text-caption-lh);letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-tertiary)}
+.record-value{font-family:var(--font-display);font-size:var(--text-h3-size);line-height:var(--text-h3-lh);font-weight:var(--font-weight-semibold)}
+
+/* Nút */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-text);font-size:var(--text-body-size);letter-spacing:var(--text-body-ls);line-height:1.18;padding:11px 21px;min-width:140px;border-radius:var(--radius-pill);border:1px solid transparent;cursor:pointer;transition:background var(--duration) var(--ease)}
+.btn-primary{background:var(--color-accent);color:var(--color-text-on-accent)}
+.btn-primary:hover{background:var(--color-accent-hover)}
+.btn-primary:active{background:var(--color-accent-active)}
+.btn:focus-visible{outline:none;box-shadow:0 0 0 4px var(--color-focus-ring)} /* F-11 */
+
+/* S-02 */
+.hud{display:flex;justify-content:space-between;font-weight:var(--font-weight-semibold);font-variant-numeric:tabular-nums}
+.hud .time.low{color:var(--color-error)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2);container-type:inline-size}
+.cell{position:relative;aspect-ratio:1;background:var(--color-bg-alt);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:visible;transition:box-shadow 80ms linear}
+.cell .mole{font-size:calc(100cqw / 3 * 0.5);line-height:1;pointer-events:none;transform:scale(0);transition:transform 90ms var(--ease)}
+.cell.has-mole .mole{transform:scale(1)}
+/* F-09: viền xanh ~150ms + "+1" bay lên */
+.cell.hit{box-shadow:inset 0 0 0 3px var(--color-accent);background:#e8f1fd}
+.plus{position:absolute;left:50%;top:40%;transform:translate(-50%,0);font-weight:var(--font-weight-semibold);font-size:var(--text-subhead-size);color:var(--color-accent);pointer-events:none;animation:floatUp 600ms var(--ease) forwards}
+@keyframes floatUp{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,-48px)}}
+
+/* S-03 */
+.end-title{font-family:var(--font-display);font-size:var(--text-h2-size);line-height:var(--text-h2-lh);font-weight:var(--font-weight-semibold)}
+.final-score{font-family:var(--font-display);font-size:var(--text-hero-size);line-height:var(--text-hero-lh);letter-spacing:var(--text-hero-ls);font-weight:var(--font-weight-semibold);font-variant-numeric:tabular-nums}
+.new-record{font-size:var(--text-caption-size);font-weight:var(--font-weight-semibold);color:var(--color-accent)}
+.end-record{color:var(--color-text-secondary)}
+
+@media (prefers-reduced-motion:reduce){.cell .mole,.plus{transition:none;animation-duration:1ms}}
