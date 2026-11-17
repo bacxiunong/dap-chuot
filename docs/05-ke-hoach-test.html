@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kế hoạch test · Đập Chuột — Tài liệu</title>
+<link rel="stylesheet" href="../design/tokens.css">
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<nav class="nav"><div class="inner">
+  <a class="brand" href="index.html">Đập Chuột · Tài liệu</a>
+  <a href="01-tong-quan.html">Tổng quan</a>
+  <a href="02-chuc-nang.html">Chức năng</a>
+  <a href="03-man-hinh.html">Màn hình</a>
+  <a href="04-quy-tac-du-lieu.html">Quy tắc &amp; dữ liệu</a>
+  <a href="05-ke-hoach-test.html" class="active">Kế hoạch test</a>
+</div></nav>
+<header class="page-head container">
+  <div class="eyebrow">Tài liệu 05</div>
+  <h1>Kế hoạch test</h1>
+  <p class="lead">Cách kiểm tra game trước khi coi là xong: môi trường, các ca kiểm thử và điều kiện hoàn thành.</p>
+</header>
+
+<section class="alt"><div class="container">
+  <h2>Phạm vi &amp; cách test</h2>
+  <ul class="list">
+    <li><strong>Test tay</strong> là chính: mở game, làm theo từng bước, so với kết quả mong đợi.</li>
+    <li>Mỗi ca test gắn với chức năng (<a href="02-chuc-nang.html">F-xx</a>) hoặc quy tắc (<a href="04-quy-tac-du-lieu.html">R-xx, D-xx</a>) để biết đang kiểm tra điều gì.</li>
+    <li>Mở <strong>Console</strong> của trình duyệt (Cmd + Option + J trên Chrome Mac) trong suốt quá trình test: không được có lỗi màu đỏ.</li>
+  </ul>
+  <h3>Môi trường</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Mã</th><th>Thiết bị / trình duyệt</th><th>Ghi chú</th></tr>
+    <tr><td>E-01</td><td>Chrome trên máy tính (bản mới)</td><td>Môi trường chính, chạy toàn bộ ca test.</td></tr>
+    <tr><td>E-02</td><td>Safari trên iPhone</td><td>Chạy các ca về chạm và bố cục.</td></tr>
+    <tr><td>E-03</td><td>Chrome trên Android</td><td>Như E-02.</td></tr>
+    <tr><td>E-04</td><td>Chrome DevTools, chế độ thiết bị rộng 360px</td><td>Kiểm tra bố cục màn nhỏ nếu không có điện thoại.</td></tr>
+  </table></div>
+</div></section>
+
+<section><div class="container">
+  <h2>Ca kiểm thử</h2>
+  <div class="table-wrap"><table>
+    <tr><th>Mã</th><th>Kiểm tra</th><th>Các bước</th><th>Kết quả mong đợi</th><th>Liên quan</th></tr>
+    <tr><td>TC-01</td><td>Mở game</td><td>Mở <code>index.html</code></td><td>Thấy màn Bắt đầu, không lỗi trong Console.</td><td>S-01</td></tr>
+    <tr><td>TC-02</td><td>Bắt đầu lượt</td><td>Bấm “Bắt đầu”</td><td>Chuyển màn Chơi; đúng 9 ô; Điểm 0; đồng hồ 30; có 1 chuột.</td><td>F-01, F-02</td></tr>
+    <tr><td>TC-03</td><td>Chỉ 1 chuột</td><td>Quan sát 10 giây</td><td>Không lúc nào có hơn 1 chuột.</td><td>R-06</td></tr>
+    <tr><td>TC-04</td><td>Không lặp ô</td><td>Quan sát 20 lần chuột xuất hiện liên tiếp</td><td>Không có 2 lần liền nhau cùng một ô.</td><td>R-04</td></tr>
+    <tr><td>TC-05</td><td>Chuột tự biến mất</td><td>Không bấm gì, đếm thời gian mỗi con ở lại</td><td>Khoảng 0,8–1,2 giây rồi chuyển ô.</td><td>F-03, R-05</td></tr>
+    <tr><td>TC-06</td><td>Đập trúng</td><td>Bấm vào chuột</td><td>Điểm +1 ngay; chuột biến mất; chuột mới ở ô khác.</td><td>F-04, R-01</td></tr>
+    <tr><td>TC-07</td><td>Bấm ô trống</td><td>Bấm ô không có chuột</td><td>Điểm không đổi.</td><td>F-04</td></tr>
+    <tr><td>TC-08</td><td>Bấm nhiều lần 1 con</td><td>Bấm thật nhanh 3–5 lần vào cùng một con</td><td>Chỉ +1 điểm.</td><td>R-03</td></tr>
+    <tr><td>TC-09</td><td>Đồng hồ</td><td>Bắt đầu lượt, bấm giờ bằng điện thoại</td><td>Giảm mỗi giây; dừng ở 0; cả lượt dài 30 giây (sai số ≤ 1 giây).</td><td>F-05, R-07</td></tr>
+    <tr><td>TC-10</td><td>Đồng hồ đỏ</td><td>Chờ tới khi còn dưới 5 giây</td><td>Số giây chuyển màu đỏ.</td><td>F-05</td></tr>
+    <tr><td>TC-11</td><td>Kết thúc lượt</td><td>Chờ hết giờ</td><td>Chuyển màn Kết thúc, hiện “Hết giờ!” và đúng điểm vừa đạt.</td><td>F-06</td></tr>
+    <tr><td>TC-12</td><td>Khóa sau hết giờ</td><td>Bấm liên tục vào lưới đúng lúc hết giờ</td><td>Điểm trên màn Kết thúc không tăng thêm.</td><td>R-02, R-08</td></tr>
+    <tr><td>TC-13</td><td>Chơi lại</td><td>Bấm “Chơi lại”</td><td>Vào màn Chơi ngay; Điểm 0; đồng hồ 30.</td><td>F-08, R-09</td></tr>
+    <tr><td>TC-14</td><td>Kỷ lục mới</td><td>Chơi lượt có điểm cao hơn kỷ lục</td><td>Hiện “Kỷ lục mới!”; kỷ lục cập nhật.</td><td>F-07, D-04</td></tr>
+    <tr><td>TC-15</td><td>Không phá kỷ lục</td><td>Chơi lượt có điểm thấp hơn hoặc bằng kỷ lục</td><td>Không hiện “Kỷ lục mới!”; kỷ lục giữ nguyên.</td><td>D-04</td></tr>
+    <tr><td>TC-16</td><td>Kỷ lục sau F5</td><td>Tải lại trang</td><td>Màn Bắt đầu hiện đúng kỷ lục cũ.</td><td>D-01, D-02</td></tr>
+    <tr><td>TC-17</td><td>Dữ liệu hỏng</td><td>Trong Console chạy <code>localStorage.setItem('dapchuot.highScore','abc')</code> rồi F5</td><td>Game không lỗi; kỷ lục hiện 0.</td><td>D-02</td></tr>
+    <tr><td>TC-18</td><td>Màn hình nhỏ</td><td>Mở ở bề rộng 360px (E-02/E-03/E-04)</td><td>Đủ 9 ô, không cuộn ngang, bấm được bằng ngón tay.</td><td>F-02, F-10</td></tr>
+    <tr><td>TC-19</td><td>Chạm trên điện thoại</td><td>Chạm nhanh liên tục vào lưới</td><td>Được nhận ngay; trang không phóng to; không bôi chọn chữ.</td><td>F-10</td></tr>
+    <tr><td>TC-20</td><td>Bàn phím</td><td>Dùng Tab rồi Enter ở màn Bắt đầu và Kết thúc</td><td>Chọn và bấm được nút “Bắt đầu”, “Chơi lại”.</td><td>F-11 (nên có)</td></tr>
+  </table></div>
+</div></section>
+
+<section class="alt"><div class="container">
+  <h2>Điều kiện hoàn thành</h2>
+  <ul class="list">
+    <li>Tất cả ca từ <strong>TC-01 đến TC-19 đạt</strong> trên E-01, và các ca TC-18, TC-19 đạt trên ít nhất một điện thoại thật hoặc E-04.</li>
+    <li>Console không có lỗi trong suốt quá trình test.</li>
+    <li>TC-20 và F-09 là “nên có”: không đạt vẫn có thể phát hành, ghi lại để làm sau.</li>
+    <li>Game chạy được từ link GitHub Pages (khi Pages hoạt động).</li>
+  </ul>
+  <h3>Mẫu ghi lỗi</h3>
+<pre>Mã ca test : TC-08
+Môi trường : E-01 (Chrome 131, macOS)
+Các bước   : Bấm nhanh 4 lần vào cùng một con chuột
+Mong đợi   : +1 điểm
+Thực tế    : +2 điểm
+Ảnh/video  : (đính kèm nếu có)</pre>
+</div></section>
+<div class="container pager"><span><a href="04-quy-tac-du-lieu.html">‹ Quy tắc &amp; dữ liệu</a></span><span><a class="link-more" href="index.html">Về mục lục</a></span></div>
+<footer><div class="container">Đập Chuột · Tài liệu v1.0 · Cập nhật 16/11/2026 · Nguồn: YEU-CAU.md · Giao diện: design/tokens.css</div></footer>
+</body>
+</html>

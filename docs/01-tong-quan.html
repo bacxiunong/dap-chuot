@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tổng quan · Đập Chuột — Tài liệu</title>
+<link rel="stylesheet" href="../design/tokens.css">
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<nav class="nav"><div class="inner">
+  <a class="brand" href="index.html">Đập Chuột · Tài liệu</a>
+  <a href="01-tong-quan.html" class="active">Tổng quan</a>
+  <a href="02-chuc-nang.html">Chức năng</a>
+  <a href="03-man-hinh.html">Màn hình</a>
+  <a href="04-quy-tac-du-lieu.html">Quy tắc &amp; dữ liệu</a>
+  <a href="05-ke-hoach-test.html">Kế hoạch test</a>
+</div></nav>
+<header class="page-head container">
+  <div class="eyebrow">Tài liệu 01</div>
+  <h1>Tổng quan</h1>
+  <p class="lead">Game là gì, làm cho ai, làm đến đâu và những quyết định đã chốt trước khi viết code.</p>
+</header>
+
+<section class="alt"><div class="container">
+  <h2>Mục tiêu</h2>
+  <p><strong>Đập Chuột</strong> là mini game chạy trên trình duyệt: lưới 3×3, chuột hiện ngẫu nhiên, bấm trúng được 1 điểm, mỗi lượt 30 giây.</p>
+  <div class="callout"><strong>Mục đích chính</strong>Đây là dự án tập vibecoding. Ưu tiên số một là game <em>chạy đúng luật</em>, code gọn, dễ đọc, dễ sửa. Không chạy theo hiệu ứng hay tính năng phụ.</div>
+  <h3>Thành công nghĩa là</h3>
+  <ul class="list">
+    <li>Mở <code>index.html</code> là chơi được, không cần cài đặt hay server.</li>
+    <li>Đạt toàn bộ tiêu chí trong <a href="05-ke-hoach-test.html">Kế hoạch test</a>.</li>
+    <li>Đưa được lên GitHub, có link chơi online qua GitHub Pages.</li>
+  </ul>
+</div></section>
+
+<section><div class="container">
+  <h2>Người dùng</h2>
+  <div class="table-wrap"><table>
+    <tr><th>Ai</th><th>Nhu cầu</th></tr>
+    <tr><td>Người làm dự án (bạn)</td><td>Học quy trình: viết yêu cầu → tài liệu → code → test → đưa lên GitHub.</td></tr>
+    <tr><td>Người chơi thử (bạn bè, đồng nghiệp)</td><td>Mở link, hiểu luật trong 5 giây, chơi một lượt 30 giây, thấy điểm và kỷ lục.</td></tr>
+  </table></div>
+</div></section>
+
+<section class="alt"><div class="container">
+  <h2>Quyết định đã chốt</h2>
+  <p class="muted">Từ buổi phỏng vấn ngày 16/11/2026. Câu 1 do bạn chọn; câu 2–5 bạn giao Claude chọn theo hướng đơn giản, dễ test.</p>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>Câu hỏi</th><th>Quyết định</th></tr>
+    <tr><td>1</td><td>Game làm cho ai, để làm gì?</td><td>Chủ yếu để tập vibecoding. Đơn giản, chạy đúng luật là đủ.</td></tr>
+    <tr><td>2</td><td>Tốc độ chuột có đổi trong lượt?</td><td><strong>Cố định.</strong> Mỗi con hiện ngẫu nhiên 0,8–1,2 giây suốt 30 giây.</td></tr>
+    <tr><td>3</td><td>Bấm trượt có bị trừ điểm?</td><td><strong>Không.</strong> Bấm ô trống hoặc để chuột chạy mất đều được 0 điểm.</td></tr>
+    <tr><td>4</td><td>Lưu những gì?</td><td><strong>Chỉ lưu kỷ lục</strong> (một con số) trên trình duyệt. Không nhập tên, không bảng xếp hạng.</td></tr>
+    <tr><td>5</td><td>Hình ảnh và âm thanh?</td><td><strong>Emoji 🐭 + design system</strong> có sẵn. Không âm thanh ở v1.0.</td></tr>
+  </table></div>
+</div></section>
+
+<section><div class="container">
+  <h2>Phạm vi phiên bản 1.0</h2>
+  <div class="cards">
+    <div class="card"><div class="num">Trong phạm vi</div><h3>Làm ở v1.0</h3>
+      <ul class="list"><li>Màn Bắt đầu, Chơi, Kết thúc</li><li>Lưới 3×3, 1 chuột mỗi lúc</li><li>Điểm, đồng hồ 30 giây</li><li>Kỷ lục lưu trên trình duyệt</li><li>Chơi được trên máy tính và điện thoại</li></ul></div>
+    <div class="card"><div class="num">Ngoài phạm vi</div><h3>Để sau</h3>
+      <ul class="list"><li>Nhiều mức độ khó, chuột nhanh dần</li><li>Bom, vật cản, trừ điểm</li><li>Âm thanh, nhạc nền</li><li>Bảng xếp hạng online, đăng nhập</li><li>Nút tạm dừng</li></ul></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="container">
+  <h2>Công nghệ &amp; cấu trúc thư mục</h2>
+  <p>HTML + CSS + JavaScript thuần, không thư viện, không bước build. Giao diện dùng biến trong <code>design/tokens.css</code>.</p>
+<pre>videcoding/
+├── YEU-CAU.md            yêu cầu gốc
+├── design/
+│   ├── tokens.css        màu, chữ, khoảng cách, bo góc
+│   └── design-system.html
+├── docs/                 bộ tài liệu này
+└── (sắp tới) index.html, style.css, game.js   ← code game</pre>
+  <h3>Thuật ngữ</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Từ</th><th>Nghĩa</th></tr>
+    <tr><td>Lượt</td><td>Một lần chơi 30 giây, từ lúc bấm Bắt đầu tới khi hết giờ.</td></tr>
+    <tr><td>Ô / hang</td><td>Một trong 9 vị trí trên lưới, đánh số 0–8 từ trái sang phải, trên xuống dưới.</td></tr>
+    <tr><td>Đập trúng</td><td>Bấm vào ô đang có chuột, khi lượt còn đang chạy.</td></tr>
+    <tr><td>Kỷ lục</td><td>Điểm cao nhất từng đạt trên trình duyệt này.</td></tr>
+  </table></div>
+</div></section>
+<div class="container pager"><span><a href="index.html">‹ Mục lục</a></span><span><a class="link-more" href="02-chuc-nang.html">Chức năng</a></span></div>
+<footer><div class="container">Đập Chuột · Tài liệu v1.0 · Cập nhật 16/11/2026 · Nguồn: YEU-CAU.md · Giao diện: design/tokens.css</div></footer>
+</body>
+</html>

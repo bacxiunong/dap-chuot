@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Màn hình · Đập Chuột — Tài liệu</title>
+<link rel="stylesheet" href="../design/tokens.css">
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<nav class="nav"><div class="inner">
+  <a class="brand" href="index.html">Đập Chuột · Tài liệu</a>
+  <a href="01-tong-quan.html">Tổng quan</a>
+  <a href="02-chuc-nang.html">Chức năng</a>
+  <a href="03-man-hinh.html" class="active">Màn hình</a>
+  <a href="04-quy-tac-du-lieu.html">Quy tắc &amp; dữ liệu</a>
+  <a href="05-ke-hoach-test.html">Kế hoạch test</a>
+</div></nav>
+<header class="page-head container">
+  <div class="eyebrow">Tài liệu 03</div>
+  <h1>Màn hình</h1>
+  <p class="lead">Ba màn hình của game, các thành phần trên từng màn và token giao diện dùng cho chúng.</p>
+</header>
+
+<section class="alt"><div class="container">
+  <h2>Phác thảo</h2>
+  <p class="muted">Bản phác thảo bố cục (wireframe), chưa phải giao diện cuối. Kích thước tham chiếu: điện thoại rộng 360–430px; trên máy tính, khung game rộng tối đa 480px và nằm giữa trang.</p>
+  <div class="screens">
+    <div>
+      <h3>S-01 · Bắt đầu</h3>
+      <div class="phone">
+        <div class="ttl">Đập Chuột 🐭</div>
+        <div class="sub">Bấm trúng chuột để được 1 điểm.<br>Bạn có 30 giây!</div>
+        <div><div class="label">Kỷ lục</div><div style="font-size:24px;font-weight:600">42</div></div>
+        <span class="pill">Bắt đầu</span>
+      </div>
+    </div>
+    <div>
+      <h3>S-02 · Chơi</h3>
+      <div class="phone">
+        <div class="hud"><span>Điểm: 12</span><span class="time">⏱ 18</span></div>
+        <div class="grid3"><div></div><div></div><div>🐭</div><div></div><div class="hit">+1</div><div></div><div></div><div></div><div></div></div>
+        <div class="sub">Dưới 5 giây, số giây chuyển đỏ.</div>
+      </div>
+    </div>
+    <div>
+      <h3>S-03 · Kết thúc</h3>
+      <div class="phone">
+        <div class="ttl">Hết giờ!</div>
+        <div><div class="label">Điểm của bạn</div><div class="big">45</div></div>
+        <div class="badge-new">Kỷ lục mới!</div>
+        <div class="sub">Kỷ lục: 45</div>
+        <span class="pill">Chơi lại</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="container">
+  <h2>Thành phần từng màn hình</h2>
+  <h3>S-01 · Bắt đầu</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Thành phần</th><th>Nội dung / hành vi</th><th>Token gợi ý</th></tr>
+    <tr><td>Tên game</td><td>“Đập Chuột 🐭”</td><td><code>--text-h1-*</code>, <code>--font-display</code></td></tr>
+    <tr><td>Hướng dẫn</td><td>1–2 dòng: “Bấm trúng chuột để được 1 điểm. Bạn có 30 giây!”</td><td><code>--text-subhead-sm-*</code>, <code>--color-text-secondary</code></td></tr>
+    <tr><td>Kỷ lục</td><td>Nhãn “Kỷ lục” + số. Ẩn nếu chưa có kỷ lục hoặc không lưu được.</td><td><code>--text-caption-*</code>, <code>--color-text-tertiary</code></td></tr>
+    <tr><td>Nút “Bắt đầu”</td><td>Nút chính, chuyển sang S-02.</td><td><code>--color-accent</code>, <code>--radius-pill</code></td></tr>
+  </table></div>
+
+  <h3>S-02 · Chơi</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Thành phần</th><th>Nội dung / hành vi</th><th>Token gợi ý</th></tr>
+    <tr><td>Thanh điểm</td><td>“Điểm: N”, cập nhật ngay khi trúng.</td><td><code>--text-body-*</code>, đậm 600</td></tr>
+    <tr><td>Đồng hồ</td><td>Số giây còn lại 30 → 0; dưới 5 giây chuyển đỏ.</td><td><code>--color-error</code></td></tr>
+    <tr><td>Lưới 3×3</td><td>9 ô vuông bằng nhau, khoảng cách 8px.</td><td><code>--color-bg-alt</code>, <code>--radius-md</code>, <code>--space-2</code></td></tr>
+    <tr><td>Chuột</td><td>Emoji 🐭 nằm giữa ô, cỡ khoảng 50% chiều rộng ô.</td><td>—</td></tr>
+    <tr><td>Phản hồi trúng</td><td>Viền xanh + chữ “+1” khoảng 150ms (F-09).</td><td><code>--color-accent</code>, <code>--duration</code></td></tr>
+  </table></div>
+
+  <h3>S-03 · Kết thúc</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Thành phần</th><th>Nội dung / hành vi</th><th>Token gợi ý</th></tr>
+    <tr><td>Tiêu đề</td><td>“Hết giờ!”</td><td><code>--text-h2-*</code></td></tr>
+    <tr><td>Điểm lượt này</td><td>Số lớn, nổi bật nhất màn hình.</td><td><code>--text-hero-*</code></td></tr>
+    <tr><td>“Kỷ lục mới!”</td><td>Chỉ hiện khi điểm lượt này lớn hơn kỷ lục cũ.</td><td><code>--text-caption-*</code>, màu cam nhấn</td></tr>
+    <tr><td>Kỷ lục</td><td>“Kỷ lục: N” (đã cập nhật nếu vừa phá).</td><td><code>--color-text-secondary</code></td></tr>
+    <tr><td>Nút “Chơi lại”</td><td>Nút chính, vào ngay lượt mới (S-02).</td><td><code>--color-accent</code>, <code>--radius-pill</code></td></tr>
+  </table></div>
+</div></section>
+
+<section class="alt"><div class="container">
+  <h2>Chuyển màn hình</h2>
+  <div class="flow"><span class="node">S-01 Bắt đầu</span><span class="arrow">“Bắt đầu” →</span><span class="node">S-02 Chơi</span><span class="arrow">hết 30 giây →</span><span class="node">S-03 Kết thúc</span><span class="arrow">“Chơi lại” → S-02</span></div>
+  <ul class="list">
+    <li>Chỉ hiện một màn hình tại một thời điểm; không đổi địa chỉ trang (cùng một file <code>index.html</code>).</li>
+    <li>Tải lại trang (F5) luôn quay về S-01.</li>
+  </ul>
+  <h3>Bố cục đáp ứng</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Màn rộng</th><th>Cách hiển thị</th></tr>
+    <tr><td>360–734px (điện thoại)</td><td>Khung game chiếm toàn chiều ngang, lề 16px; lưới vừa khít, không cuộn ngang.</td></tr>
+    <tr><td>Từ 735px (máy tính bảng, máy tính)</td><td>Khung game rộng tối đa 480px, căn giữa, nền xám nhạt <code>--color-bg-alt</code> xung quanh.</td></tr>
+  </table></div>
+</div></section>
+<div class="container pager"><span><a href="02-chuc-nang.html">‹ Chức năng</a></span><span><a class="link-more" href="04-quy-tac-du-lieu.html">Quy tắc &amp; dữ liệu</a></span></div>
+<footer><div class="container">Đập Chuột · Tài liệu v1.0 · Cập nhật 16/11/2026 · Nguồn: YEU-CAU.md · Giao diện: design/tokens.css</div></footer>
+</body>
+</html>
