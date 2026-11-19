@@ -5,6 +5,7 @@
 .dockerignore
 docs
 README.md
+.env.example
 YEU-CAU.md
 Dockerfile
 docker-compose.yml
@@ -16,3 +17,7 @@ npm-debug.log*
 .vscode
 .idea
 *.log
+api
+vercel.json
+public
+.vercel
