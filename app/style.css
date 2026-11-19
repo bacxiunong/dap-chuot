@@ -73,3 +73,25 @@ body{
 .greeting{color:var(--color-text-secondary)}
 .greeting strong{color:var(--color-text)}
 .save-error{font-size:var(--text-caption-size);color:var(--color-error)}
+
+/* ---- Menu chung của bacxiunong.com + tông màu chung (tím xám hoàng hôn) ---- */
+:root{--site-ink:#16131f;--site-dusk:#2b2638;--site-haze:#6b6480;--site-glow:#f3e9dc}
+.site-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:var(--space-5);
+  padding:0 var(--space-4);min-height:48px;overflow-x:auto;white-space:nowrap;
+  background:rgba(22,19,31,.86);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);
+  font-size:var(--text-caption-size);letter-spacing:.02em;-webkit-user-select:none;user-select:none}
+.site-nav a{color:rgba(243,233,220,.72);text-decoration:none;padding:6px 0}
+.site-nav a:hover,.site-nav a[aria-current="page"]{color:var(--site-glow)}
+.site-nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--site-glow)}
+.site-nav .site-brand{color:var(--site-glow);font-weight:var(--font-weight-semibold);margin-right:auto;letter-spacing:.04em}
+.site-nav a:focus-visible{outline:2px solid var(--site-glow);outline-offset:2px;border-radius:4px}
+body{display:flex;flex-direction:column}
+@media (min-width:735px){
+  body{display:block;padding:0;
+    background:radial-gradient(120% 80% at 50% 0%,#5a5168 0%,var(--site-dusk) 45%,var(--site-ink) 100%) fixed}
+  .site-nav{position:fixed;left:0;right:0}
+  .frame{margin:calc(48px + var(--space-8)) auto var(--space-8);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+}
+
+
+@media (max-width:520px){.site-nav{gap:16px}.site-nav .site-brand{display:none}.site-nav a:nth-child(2){margin-left:auto}}

@@ -326,7 +326,7 @@ $('form-register').addEventListener('submit', async (e) => {
     fullName: checkName(payload.fullName), email: checkEmail(payload.email), phone: checkPhone(payload.phone),
     consent: payload.consent ? '' : 'Bạn cần đồng ý cho lưu thông tin để đăng ký.',
   };
-  const data = await submitForm(f, '/api/players', payload, local);
+  const data = await submitForm(f, 'api/players', payload, local);
   if (data) { storeToken(data.token); goStart(data.fullName); }
 });
 
@@ -335,7 +335,7 @@ $('form-resume').addEventListener('submit', async (e) => {
   const f = e.currentTarget;
   const payload = { email: f.elements.email.value, phone: f.elements.phone.value };
   const local = { email: checkEmail(payload.email), phone: checkPhone(payload.phone) };
-  const data = await submitForm(f, '/api/players/resume', payload, local);
+  const data = await submitForm(f, 'api/players/resume', payload, local);
   if (data) { storeToken(data.token); goStart(data.fullName); }
 });
 
@@ -368,7 +368,7 @@ for (const form of [$('form-register'), $('form-resume')]) {
 async function submitScore(score) { // F-16
   if (!player.apiAvailable || !player.token) return;
   try {
-    const r = await api('POST', '/api/rounds', { score });
+    const r = await api('POST', 'api/rounds', { score });
     if (r.status === 401) { storeToken(null); player.name = null; } // người chơi đã bị xoá
     if (r.status !== 201) { state.saveFailed = true; render(); }
   } catch (e) {
@@ -383,7 +383,7 @@ async function boot() {
   player.token = loadToken();
   if (!window.DAPCHUOT_API) return goStart(null); // F-17: bản tĩnh, chạy như v1.0
   try {
-    const r = await api('GET', '/api/me');
+    const r = await api('GET', 'api/me');
     if (r.isJson && (r.status === 200 || r.status === 401)) {
       player.apiAvailable = true;
       if (r.status === 200) return goStart(r.data.fullName);
