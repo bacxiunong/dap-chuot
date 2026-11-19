@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Người chơi · Quản trị Đập Chuột</title>
+<link rel="stylesheet" href="/design/tokens.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body data-page="players">
+<header class="topbar"><div class="inner">
+  <a class="brand" href="/admin/">Quản trị Đập Chuột</a>
+  <nav><a href="/admin/" class="active">Người chơi</a><a href="/admin/admins.html">Quản lý admin</a></nav>
+  <span class="who" id="who"></span>
+  <button type="button" class="link-btn light" id="btn-logout">Đăng xuất</button>
+</div></header>
+
+<main class="container">
+  <div class="toolbar">
+    <h1>Người chơi <span class="count" id="total"></span></h1>
+    <input id="search" class="input search" type="search" placeholder="Tìm họ tên, email, SĐT" aria-label="Tìm kiếm người chơi" autocomplete="off">
+    <a class="btn btn-primary" id="btn-csv" href="/api/admin/players.csv">Xuất CSV</a>
+  </div>
+  <p class="help error" id="list-error" role="alert"></p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Họ tên</th><th>Email</th><th>SĐT</th><th>Ngày đăng ký</th><th class="num">Số lượt</th><th class="num">Điểm cao nhất</th><th>Lượt gần nhất</th><th></th></tr></thead>
+      <tbody id="rows"><tr><td colspan="8" class="empty">Đang tải…</td></tr></tbody>
+    </table>
+  </div>
+  <div class="pager">
+    <button type="button" class="btn btn-neutral btn-sm" id="prev">‹ Trước</button>
+    <span id="page-info"></span>
+    <button type="button" class="btn btn-neutral btn-sm" id="next">Sau ›</button>
+  </div>
+</main>
+
+<dialog id="confirm-delete">
+  <form method="dialog">
+    <h2>Xoá người chơi?</h2>
+    <p>Xoá <strong id="del-name"></strong> (<span id="del-email"></span>) cùng toàn bộ điểm của người này. Không hoàn tác được.</p>
+    <div class="dialog-actions">
+      <button value="cancel" class="btn btn-neutral">Huỷ</button>
+      <button value="ok" class="btn btn-danger">Xoá</button>
+    </div>
+  </form>
+</dialog>
+<script src="/admin/admin.js"></script>
+</body>
+</html>

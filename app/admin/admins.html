@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Quản lý admin · Quản trị Đập Chuột</title>
+<link rel="stylesheet" href="/design/tokens.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body data-page="admins">
+<header class="topbar"><div class="inner">
+  <a class="brand" href="/admin/">Quản trị Đập Chuột</a>
+  <nav><a href="/admin/">Người chơi</a><a href="/admin/admins.html" class="active">Quản lý admin</a></nav>
+  <span class="who" id="who"></span>
+  <button type="button" class="link-btn light" id="btn-logout">Đăng xuất</button>
+</div></header>
+
+<main class="container">
+  <h1>Quản lý admin</h1>
+  <p class="help error" id="admins-error" role="alert"></p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tên đăng nhập</th><th>Ngày tạo</th><th>Đăng nhập gần nhất</th><th></th></tr></thead>
+      <tbody id="admin-rows"><tr><td colspan="4" class="empty">Đang tải…</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="cards">
+    <form id="form-add-admin" class="card form" novalidate>
+      <h2>Thêm admin</h2>
+      <div class="field">
+        <label for="new-username">Tên đăng nhập</label>
+        <input id="new-username" name="username" class="input" autocomplete="off" required>
+        <span class="help error" data-error-for="username"></span>
+      </div>
+      <div class="field">
+        <label for="new-password">Mật khẩu (tối thiểu 10 ký tự)</label>
+        <input id="new-password" name="password" class="input" type="password" autocomplete="new-password" required>
+        <span class="help error" data-error-for="password"></span>
+      </div>
+      <p class="help" data-ok></p>
+      <button type="submit" class="btn btn-primary">Thêm admin</button>
+    </form>
+
+    <form id="form-password" class="card form" novalidate>
+      <h2>Đổi mật khẩu của tôi</h2>
+      <div class="field">
+        <label for="cur-password">Mật khẩu hiện tại</label>
+        <input id="cur-password" name="currentPassword" class="input" type="password" autocomplete="current-password" required>
+        <span class="help error" data-error-for="currentPassword"></span>
+      </div>
+      <div class="field">
+        <label for="next-password">Mật khẩu mới (tối thiểu 10 ký tự)</label>
+        <input id="next-password" name="newPassword" class="input" type="password" autocomplete="new-password" required>
+        <span class="help error" data-error-for="newPassword"></span>
+      </div>
+      <p class="help" data-ok></p>
+      <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+    </form>
+  </div>
+</main>
+<script src="/admin/admin.js"></script>
+</body>
+</html>

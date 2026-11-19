@@ -1,0 +1,80 @@
+/* Trang quản trị — dùng biến trong /design/tokens.css */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-text);font-size:var(--text-body-size);line-height:var(--text-body-lh);letter-spacing:var(--text-body-ls);color:var(--color-text);background:var(--color-bg-alt);-webkit-font-smoothing:antialiased}
+a{color:var(--color-link);text-decoration:none}
+a:hover{text-decoration:underline}
+h1{font-family:var(--font-display);font-size:var(--text-h3-size);line-height:var(--text-h3-lh);font-weight:var(--font-weight-semibold)}
+h2{font-family:var(--font-display);font-size:var(--text-subhead-sm-size);font-weight:var(--font-weight-semibold);margin-bottom:var(--space-2)}
+.muted{color:var(--color-text-secondary)}
+
+/* Thanh trên */
+.topbar{position:sticky;top:0;z-index:10;background:var(--color-nav);backdrop-filter:var(--blur-nav);-webkit-backdrop-filter:var(--blur-nav)}
+.topbar .inner{max-width:1200px;margin:0 auto;min-height:48px;display:flex;align-items:center;gap:var(--space-5);padding:0 var(--space-4);font-size:var(--text-body-sm-size);flex-wrap:wrap}
+.topbar a,.topbar .who{color:var(--color-text-on-dark)}
+.topbar .brand{font-weight:var(--font-weight-semibold)}
+.topbar nav{display:flex;gap:var(--space-4);margin-right:auto}
+.topbar nav a{opacity:.75}
+.topbar nav a.active,.topbar nav a:hover{opacity:1;text-decoration:none}
+.topbar .who{opacity:.75}
+
+.container{max-width:1200px;margin:0 auto;padding:var(--space-8) var(--space-4)}
+.container > h1{margin-bottom:var(--space-6)}
+
+/* Thanh công cụ */
+.toolbar{display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap;margin-bottom:var(--space-4)}
+.toolbar h1{margin-right:auto}
+.count{color:var(--color-text-tertiary);font-weight:var(--font-weight-regular)}
+.search{max-width:320px}
+
+/* Bảng */
+.table-wrap{background:var(--color-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);overflow-x:auto;margin-bottom:var(--space-6)}
+table{width:100%;border-collapse:collapse;font-size:var(--text-body-sm-size);line-height:var(--text-body-sm-lh)}
+th,td{text-align:left;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-border);white-space:nowrap}
+th{font-weight:var(--font-weight-semibold);color:var(--color-text-secondary);background:var(--color-bg)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:#fafafc}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.empty{text-align:center;color:var(--color-text-tertiary);padding:var(--space-8)}
+.pager{display:flex;align-items:center;justify-content:flex-end;gap:var(--space-4);font-size:var(--text-body-sm-size)}
+
+/* Nút */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-text);font-size:var(--text-body-sm-size);line-height:1.2;padding:10px 20px;border-radius:var(--radius-pill);border:1px solid transparent;cursor:pointer;white-space:nowrap;text-decoration:none !important;transition:background var(--duration) var(--ease)}
+.btn:focus-visible,.link-btn:focus-visible,.input:focus{outline:none;box-shadow:0 0 0 4px var(--color-focus-ring)}
+.btn-primary{background:var(--color-accent);color:var(--color-text-on-accent)}
+.btn-primary:hover{background:var(--color-accent-hover)}
+.btn-neutral{background:var(--color-bg);color:var(--color-text);border-color:var(--color-border)}
+.btn-neutral:hover{background:#e8e8ed}
+.btn-danger{background:var(--color-error);color:#fff}
+.btn-sm{padding:6px 14px}
+.btn[disabled]{opacity:.45;cursor:default;pointer-events:none}
+.link-btn{background:none;border:0;padding:4px;font:inherit;color:var(--color-link);cursor:pointer}
+.link-btn:hover{text-decoration:underline}
+.link-btn.light{color:var(--color-text-on-dark);opacity:.85}
+.link-btn.danger{color:var(--color-error)}
+
+/* Form */
+.form{display:flex;flex-direction:column;gap:var(--space-4)}
+.field{display:flex;flex-direction:column;gap:var(--space-1)}
+.field label{font-size:var(--text-body-sm-size);font-weight:var(--font-weight-semibold)}
+.input{font-family:var(--font-text);font-size:var(--text-body-size);color:var(--color-text);background:var(--color-bg);height:44px;padding:0 var(--space-4);border:1px solid var(--color-border-strong);border-radius:var(--radius-md);width:100%}
+.input:focus{border-color:var(--color-accent)}
+.input[aria-invalid="true"]{border-color:var(--color-error);background:var(--color-error-bg)}
+.help{font-size:var(--text-caption-size);color:var(--color-text-secondary)}
+.help:empty{display:none}
+.help.error{color:var(--color-error)}
+.help.ok{color:var(--color-success)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--space-6)}
+.card{background:var(--color-bg);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-card)}
+.card .btn{align-self:flex-start}
+
+/* Đăng nhập */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--space-4)}
+.login-card{width:100%;max-width:380px;background:var(--color-bg);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);padding:var(--space-8) var(--space-6);text-align:center}
+.login-card .form{text-align:left;margin-top:var(--space-6)}
+.login-card .btn{align-self:stretch;font-size:var(--text-body-size);padding:12px}
+
+/* Hộp xác nhận */
+dialog{border:0;border-radius:var(--radius-lg);padding:var(--space-6);max-width:440px;width:calc(100% - 32px);box-shadow:var(--shadow-hover);margin:auto}
+dialog::backdrop{background:var(--color-overlay)}
+dialog p{margin:var(--space-2) 0 var(--space-6);color:var(--color-text-secondary)}
+.dialog-actions{display:flex;justify-content:flex-end;gap:var(--space-3)}
