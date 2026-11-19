@@ -14,6 +14,10 @@ const LOCK_MINUTES = 15;
 const PAGE_SIZE = 20;
 const COOKIE = 'dc_admin';
 const COOKIE_SECURE = process.env.COOKIE_SECURE === 'true';
+// Chạy dưới một đường dẫn con, ví dụ BASE_PATH=/game-dap-chuot (để trống = chạy ở gốc như cũ)
+const BASE_PATH = (process.env.BASE_PATH || '').replace(/\/+$/, '');
+// Các trang được phép gửi thao tác thay đổi dữ liệu, ngoài chính host đang phục vụ (cách nhau dấu phẩy)
+const ALLOWED_ORIGINS = new Set((process.env.ALLOWED_ORIGINS || '').split(',').map((x) => x.trim().replace(/\/+$/, '')).filter(Boolean));
 
 const APP_DIR = path.join(__dirname, '..', 'app');
 const DESIGN_DIR = path.join(__dirname, '..', 'design');
@@ -96,6 +100,7 @@ function parseCookies(req) {
 function checkOrigin(req) {
   const origin = req.headers.origin;
   if (!origin) return; // công cụ dòng lệnh không gửi Origin
+  if (ALLOWED_ORIGINS.has(origin)) return;
   if (origin !== `http://${req.headers.host}` && origin !== `https://${req.headers.host}`) {
     throw new HttpError(403, 'Yêu cầu không đến từ trang hợp lệ.');
   }
@@ -408,10 +413,16 @@ async function serveStatic(req, res, urlPath) {
     return p ? serveFile(req, res, p) : sendText(res, 403, 'Forbidden');
   }
 
+  // /admin (không có dấu /) → /admin/ để các đường dẫn tương đối trong trang admin đúng
+  if (urlPath === '/admin') {
+    res.writeHead(308, { Location: `${BASE_PATH}/admin/`, 'Cache-Control': 'no-store' });
+    return res.end();
+  }
+
   // A-R1: trang quản trị phải đăng nhập (trừ màn đăng nhập và file giao diện của nó)
   if (urlPath === '/admin' || urlPath.startsWith('/admin/')) {
     if (!PUBLIC_ADMIN.has(urlPath) && !(await currentAdmin(req))) {
-      res.writeHead(302, { Location: '/admin/login.html', 'Cache-Control': 'no-store' });
+      res.writeHead(302, { Location: `${BASE_PATH}/admin/login.html`, 'Cache-Control': 'no-store' });
       return res.end();
     }
     const p = safeJoin(APP_DIR, (urlPath === '/admin' ? '/admin/' : urlPath).slice(1));
@@ -429,6 +440,19 @@ async function route(req, res) {
   try { urlPath = decodeURIComponent(url.pathname); } catch { return sendText(res, 400, 'Bad Request'); }
   const m = req.method;
   let mm;
+
+  // BASE_PATH: /game-dap-chuot → chuyển về /game-dap-chuot/ ; /game-dap-chuot/x → xử lý như /x
+  if (BASE_PATH) {
+    if (urlPath === BASE_PATH) {
+      res.writeHead(308, { Location: `${BASE_PATH}/${url.search}`, 'Cache-Control': 'no-store' });
+      return res.end();
+    }
+    if (urlPath.startsWith(BASE_PATH + '/')) urlPath = urlPath.slice(BASE_PATH.length);
+    else if (urlPath === '/') {
+      res.writeHead(302, { Location: `${BASE_PATH}/`, 'Cache-Control': 'no-store' });
+      return res.end();
+    }
+  }
 
   if (urlPath === '/healthz') return sendText(res, 200, 'ok');
   // Báo cho game biết đang chạy cùng server (có API đăng ký) — bản tĩnh dùng app/env.js = false
