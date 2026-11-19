@@ -51,3 +51,25 @@ body{
 .end-record{color:var(--color-text-secondary)}
 
 @media (prefers-reduced-motion:reduce){.cell .mole,.plus{transition:none;animation-duration:1ms}}
+
+/* ---------- v1.1 · Đăng ký (S-00) ---------- */
+.form{width:100%;display:flex;flex-direction:column;gap:var(--space-4);text-align:left}
+.form .btn{align-self:center}
+.field{display:flex;flex-direction:column;gap:var(--space-1)}
+.field label{font-size:var(--text-body-sm-size);font-weight:var(--font-weight-semibold)}
+.input{font-family:var(--font-text);font-size:var(--text-body-size);color:var(--color-text);background:var(--color-bg);height:48px;padding:0 var(--space-4);border:1px solid var(--color-border-strong);border-radius:var(--radius-md);width:100%;-webkit-user-select:text;user-select:text;transition:border-color var(--duration) var(--ease),box-shadow var(--duration) var(--ease)}
+.input:focus{outline:none;border-color:var(--color-accent);box-shadow:0 0 0 4px var(--color-focus-ring)}
+.input[aria-invalid="true"]{border-color:var(--color-error);background:var(--color-error-bg)}
+.check{display:flex;align-items:flex-start;gap:var(--space-3);font-size:var(--text-body-sm-size);font-weight:var(--font-weight-regular) !important;line-height:var(--text-body-sm-lh)}
+.check input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--color-accent)}
+.help{font-size:var(--text-caption-size);line-height:var(--text-caption-lh);color:var(--color-text-secondary)}
+.help.error{color:var(--color-error);min-height:0}
+.help.error:empty{display:none}
+.form-error{text-align:center}
+.link-btn{background:none;border:0;padding:var(--space-1);font:inherit;font-size:var(--text-body-sm-size);color:var(--color-link);cursor:pointer;align-self:center}
+.link-btn:hover{text-decoration:underline}
+.link-btn:focus-visible{outline:none;box-shadow:0 0 0 4px var(--color-focus-ring);border-radius:var(--radius-sm)}
+.btn[disabled]{opacity:.5;cursor:default}
+.greeting{color:var(--color-text-secondary)}
+.greeting strong{color:var(--color-text)}
+.save-error{font-size:var(--text-caption-size);color:var(--color-error)}

@@ -10,15 +10,65 @@
 <body>
 <main class="frame">
 
-  <!-- S-01 · Bắt đầu -->
-  <section id="screen-start" class="screen screen-center">
+  <!-- S-00 · Đăng ký (v1.1 — chỉ hiện khi có server) -->
+  <section id="screen-register" class="screen screen-center" hidden>
     <h1 class="title">Đập Chuột 🐭</h1>
+    <p class="hint" id="reg-hint">Đăng ký để lưu điểm của bạn</p>
+
+    <form id="form-register" class="form" novalidate>
+      <div class="field">
+        <label for="reg-name">Họ và tên</label>
+        <input id="reg-name" name="fullName" class="input" autocomplete="name" maxlength="100" required>
+        <span class="help error" data-error-for="fullName"></span>
+      </div>
+      <div class="field">
+        <label for="reg-email">Email</label>
+        <input id="reg-email" name="email" class="input" type="email" autocomplete="email" maxlength="254" required>
+        <span class="help error" data-error-for="email"></span>
+      </div>
+      <div class="field">
+        <label for="reg-phone">Số điện thoại</label>
+        <input id="reg-phone" name="phone" class="input" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" required>
+        <span class="help error" data-error-for="phone"></span>
+      </div>
+      <div class="field">
+        <label class="check"><input id="reg-consent" name="consent" type="checkbox"> Tôi đồng ý cho lưu họ tên, email và số điện thoại để ghi nhận điểm.</label>
+        <span class="help error" data-error-for="consent"></span>
+      </div>
+      <p class="help error form-error" data-error-for="_form"></p>
+      <button type="submit" class="btn btn-primary">Đăng ký và chơi</button>
+      <button type="button" class="link-btn" id="btn-show-resume">Tôi đã đăng ký ›</button>
+    </form>
+
+    <form id="form-resume" class="form" novalidate hidden>
+      <p class="help">Nhập email và số điện thoại bạn đã đăng ký.</p>
+      <div class="field">
+        <label for="res-email">Email</label>
+        <input id="res-email" name="email" class="input" type="email" autocomplete="email" maxlength="254" required>
+        <span class="help error" data-error-for="email"></span>
+      </div>
+      <div class="field">
+        <label for="res-phone">Số điện thoại</label>
+        <input id="res-phone" name="phone" class="input" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" required>
+        <span class="help error" data-error-for="phone"></span>
+      </div>
+      <p class="help error form-error" data-error-for="_form"></p>
+      <button type="submit" class="btn btn-primary">Tiếp tục</button>
+      <button type="button" class="link-btn" id="btn-show-register">‹ Đăng ký mới</button>
+    </form>
+  </section>
+
+  <!-- S-01 · Bắt đầu -->
+  <section id="screen-start" class="screen screen-center" hidden>
+    <h1 class="title">Đập Chuột 🐭</h1>
+    <p class="greeting" id="start-greeting" hidden>Xin chào, <strong id="start-player-name"></strong></p>
     <p class="hint">Bấm trúng chuột để được 1 điểm.<br>Bạn có 30 giây!</p>
     <div class="record" id="start-record">
       <div class="label">Kỷ lục</div>
       <div class="record-value" id="start-record-value">0</div>
     </div>
     <button type="button" class="btn btn-primary" id="btn-start">Bắt đầu</button>
+    <button type="button" class="link-btn" id="btn-not-me" hidden>Không phải bạn?</button>
   </section>
 
   <!-- S-02 · Chơi -->
@@ -38,11 +88,13 @@
       <div class="final-score" id="end-score">0</div>
     </div>
     <div class="new-record" id="end-new-record" hidden>Kỷ lục mới!</div>
+    <div class="save-error" id="end-save-error" hidden>Chưa lưu được điểm lượt này.</div>
     <div class="end-record" id="end-record">Kỷ lục: <span id="end-record-value">0</span></div>
     <button type="button" class="btn btn-primary" id="btn-replay">Chơi lại</button>
   </section>
 
 </main>
+<script src="env.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
