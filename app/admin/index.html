@@ -6,12 +6,12 @@
 <meta name="robots" content="noindex">
 <title>Người chơi · Quản trị Đập Chuột</title>
 <link rel="stylesheet" href="/design/tokens.css">
-<link rel="stylesheet" href="/admin/admin.css">
+<link rel="stylesheet" href="admin.css">
 </head>
 <body data-page="players">
 <header class="topbar"><div class="inner">
-  <a class="brand" href="/admin/">Quản trị Đập Chuột</a>
-  <nav><a href="/admin/" class="active">Người chơi</a><a href="/admin/admins.html">Quản lý admin</a></nav>
+  <a class="brand" href="./">Quản trị Đập Chuột</a>
+  <nav><a href="./" class="active">Người chơi</a><a href="admins.html">Quản lý admin</a></nav>
   <span class="who" id="who"></span>
   <button type="button" class="link-btn light" id="btn-logout">Đăng xuất</button>
 </div></header>
@@ -20,7 +20,7 @@
   <div class="toolbar">
     <h1>Người chơi <span class="count" id="total"></span></h1>
     <input id="search" class="input search" type="search" placeholder="Tìm họ tên, email, SĐT" aria-label="Tìm kiếm người chơi" autocomplete="off">
-    <a class="btn btn-primary" id="btn-csv" href="/api/admin/players.csv">Xuất CSV</a>
+    <a class="btn btn-primary" id="btn-csv" href="../api/admin/players.csv">Xuất CSV</a>
   </div>
   <p class="help error" id="list-error" role="alert"></p>
   <div class="table-wrap">
@@ -46,6 +46,6 @@
     </div>
   </form>
 </dialog>
-<script src="/admin/admin.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>

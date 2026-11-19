@@ -12,7 +12,7 @@
     }
     const res = await fetch(url, opts);
     if (res.status === 401 && page !== 'login') {
-      window.location.href = '/admin/login.html';
+      window.location.href = 'login.html';
       throw new Error('unauthorized');
     }
     const isJson = (res.headers.get('content-type') || '').includes('application/json');
@@ -50,8 +50,8 @@
       $('login-error').textContent = '';
       btn.disabled = true;
       try {
-        const r = await api('POST', '/api/admin/login', { username: f.username.value, password: f.password.value });
-        if (r.status === 200) { window.location.href = '/admin/'; return; }
+        const r = await api('POST', '../api/admin/login', { username: f.username.value, password: f.password.value });
+        if (r.status === 200) { window.location.href = './'; return; }
         $('login-error').textContent = (r.data && r.data.message) || 'Không đăng nhập được.';
         f.password.value = '';
         f.password.focus();
@@ -66,13 +66,13 @@
 
   /* ---------- Chung cho các trang cần đăng nhập ---------- */
   let me = null;
-  api('GET', '/api/admin/me').then((r) => {
+  api('GET', '../api/admin/me').then((r) => {
     if (r.status === 200) { me = r.data; $('who').textContent = me.username; }
   }).catch(() => {});
 
   $('btn-logout').addEventListener('click', async () => {
-    try { await api('POST', '/api/admin/logout', {}); } catch (e) { /* bỏ qua */ }
-    window.location.replace('/admin/login.html');
+    try { await api('POST', '../api/admin/logout', {}); } catch (e) { /* bỏ qua */ }
+    window.location.replace('login.html');
   });
 
   /* ---------- Người chơi (A-02) ---------- */
@@ -81,7 +81,7 @@
     let timer = null;
 
     function csvHref() {
-      return '/api/admin/players.csv' + (state.q ? '?q=' + encodeURIComponent(state.q) : '');
+      return '../api/admin/players.csv' + (state.q ? '?q=' + encodeURIComponent(state.q) : '');
     }
 
     async function load() {
@@ -89,7 +89,7 @@
       const params = new URLSearchParams({ page: String(state.page) });
       if (state.q) params.set('q', state.q);
       let r;
-      try { r = await api('GET', '/api/admin/players?' + params.toString()); } catch (e) { return; }
+      try { r = await api('GET', '../api/admin/players?' + params.toString()); } catch (e) { return; }
       if (r.status !== 200) { $('list-error').textContent = (r.data && r.data.message) || 'Không tải được danh sách.'; return; }
       const { items, total, pages } = r.data;
       state.pages = pages;
@@ -133,7 +133,7 @@
       dlg.returnValue = '';
       dlg.onclose = async () => {
         if (dlg.returnValue !== 'ok') return;
-        const r = await api('DELETE', '/api/admin/players/' + p.id).catch(() => null);
+        const r = await api('DELETE', '../api/admin/players/' + p.id).catch(() => null);
         if (!r || (r.status !== 204 && r.status !== 404)) {
           $('list-error').textContent = (r && r.data && r.data.message) || 'Không xoá được, vui lòng thử lại.';
         }
@@ -156,7 +156,7 @@
     async function loadAdmins() {
       $('admins-error').textContent = '';
       let r;
-      try { r = await api('GET', '/api/admin/admins'); } catch (e) { return; }
+      try { r = await api('GET', '../api/admin/admins'); } catch (e) { return; }
       if (r.status !== 200) { $('admins-error').textContent = 'Không tải được danh sách admin.'; return; }
       const tbody = $('admin-rows');
       tbody.textContent = '';
@@ -171,7 +171,7 @@
           del.textContent = 'Xoá';
           del.addEventListener('click', async () => {
             if (!window.confirm(`Xoá admin "${a.username}"?`)) return;
-            const d = await api('DELETE', '/api/admin/admins/' + a.id).catch(() => null);
+            const d = await api('DELETE', '../api/admin/admins/' + a.id).catch(() => null);
             if (!d || d.status !== 204) $('admins-error').textContent = (d && d.data && d.data.message) || 'Không xoá được.';
             loadAdmins();
           });
@@ -209,11 +209,11 @@
 
     $('form-add-admin').addEventListener('submit', (e) => {
       e.preventDefault();
-      handleForm(e.currentTarget, '/api/admin/admins', 'Đã thêm admin.', loadAdmins);
+      handleForm(e.currentTarget, '../api/admin/admins', 'Đã thêm admin.', loadAdmins);
     });
     $('form-password').addEventListener('submit', (e) => {
       e.preventDefault();
-      handleForm(e.currentTarget, '/api/admin/password', 'Đã đổi mật khẩu.');
+      handleForm(e.currentTarget, '../api/admin/password', 'Đã đổi mật khẩu.');
     });
     loadAdmins();
   }
